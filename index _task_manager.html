@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskPulse — Real-Time Task Manager</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style_task_management.css">
+</head>
+<body>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">Task<span>Pulse</span></div>
+    <div class="clock" id="liveClock">00:00:00</div>
+  </header>
+
+  <main class="layout">
+    <!-- Add task -->
+    <section class="card add-card">
+      <h2>New Task</h2>
+      <form id="taskForm">
+        <input type="text" id="taskTitle" placeholder="What needs to be done?" required>
+        <div class="row">
+          <select id="taskPriority">
+            <option value="low">Low priority</option>
+            <option value="medium" selected>Medium priority</option>
+            <option value="high">High priority</option>
+          </select>
+          <input type="time" id="taskTime">
+        </div>
+        <button type="submit" class="btn-primary">Add Task</button>
+      </form>
+    </section>
+
+    <!-- Stats -->
+    <section class="card stats-card">
+      <h2>Today's Progress</h2>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-num" id="statTotal">0</div>
+          <div class="stat-label">Total</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="statDone">0</div>
+          <div class="stat-label">Done</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num" id="statPending">0</div>
+          <div class="stat-label">Pending</div>
+        </div>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <div class="progress-text" id="progressText">0% complete</div>
+    </section>
+
+    <!-- Task list -->
+    <section class="card list-card">
+      <div class="list-head">
+        <h2>Tasks</h2>
+        <div class="filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="pending">Pending</button>
+          <button class="filter-btn" data-filter="done">Done</button>
+        </div>
+      </div>
+      <ul id="taskList" class="task-list"></ul>
+      <p id="emptyState" class="empty-state">No tasks yet — add one above to get started.</p>
+    </section>
+  </main>
+
+ 
+</div>
+
+<script src="script_task_manager.js"></script>
+</body>
+</html>
