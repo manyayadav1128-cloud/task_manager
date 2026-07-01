@@ -1,4 +1,4 @@
-// ===== Real-Time Clock =====
+
 function updateClock() {
   const now = new Date();
   const h = String(now.getHours()).padStart(2, '0');
@@ -9,7 +9,7 @@ function updateClock() {
 updateClock();
 setInterval(updateClock, 1000);
 
-// ===== State =====
+
 let tasks = JSON.parse(localStorage.getItem('taskpulse_tasks')) || [];
 let currentFilter = 'all';
 
@@ -21,12 +21,12 @@ const taskList = document.getElementById('taskList');
 const emptyState = document.getElementById('emptyState');
 const filterBtns = document.querySelectorAll('.filter-btn');
 
-// ===== Save to localStorage =====
+
 function saveTasks() {
   localStorage.setItem('taskpulse_tasks', JSON.stringify(tasks));
 }
 
-// ===== Add Task =====
+
 taskForm.addEventListener('submit', (e) => {
   e.preventDefault();
   const title = taskTitle.value.trim();
@@ -50,21 +50,21 @@ taskForm.addEventListener('submit', (e) => {
   taskTitle.focus();
 });
 
-// ===== Toggle Done =====
+
 function toggleTask(id) {
   tasks = tasks.map(t => t.id === id ? { ...t, done: !t.done } : t);
   saveTasks();
   renderTasks();
 }
 
-// ===== Delete Task =====
+
 function deleteTask(id) {
   tasks = tasks.filter(t => t.id !== id);
   saveTasks();
   renderTasks();
 }
 
-// ===== Filters =====
+
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     filterBtns.forEach(b => b.classList.remove('active'));
@@ -74,7 +74,7 @@ filterBtns.forEach(btn => {
   });
 });
 
-// ===== Render =====
+
 function renderTasks() {
   let filtered = tasks;
   if (currentFilter === 'pending') filtered = tasks.filter(t => !t.done);
@@ -107,7 +107,7 @@ function renderTasks() {
     taskList.appendChild(li);
   });
 
-  // Attach listeners
+ 
   document.querySelectorAll('.task-checkbox').forEach(cb => {
     cb.addEventListener('click', () => toggleTask(Number(cb.dataset.id)));
   });
@@ -118,7 +118,7 @@ function renderTasks() {
   updateStats();
 }
 
-// ===== Stats =====
+
 function updateStats() {
   const total = tasks.length;
   const done = tasks.filter(t => t.done).length;
@@ -132,12 +132,12 @@ function updateStats() {
   document.getElementById('progressText').textContent = `${percent}% complete`;
 }
 
-// ===== Helper: prevent HTML injection =====
+
 function escapeHtml(str) {
   const div = document.createElement('div');
   div.textContent = str;
   return div.innerHTML;
 }
 
-// ===== Init =====
+
 renderTasks();
